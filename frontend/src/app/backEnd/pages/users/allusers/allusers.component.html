@@ -1,0 +1,85 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar></app-sidebar>
+  <div class="body-wrapper">
+    <app-header></app-header>
+<div class="container-fluid">
+  <div class="row mb-3 align-items-center">
+    <div class="col-md-5 mb-3">
+      <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+        <input type="text" class="form-control" placeholder="Search for a user..." [(ngModel)]="searchTerm" (input)="onSearch()">
+      </div>
+    </div>
+    <div class="col-md-7 text-end">
+      <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+        {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-12 text-center">
+      <div class="text-md-center" style="font-weight: bold; font-size:22px">
+        USERS
+      </div>
+    </div>
+  </div>
+
+
+  <br>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let user of filteredUsers">
+      <div class="card position-relative">
+        <div class="action-buttons">
+          <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex"
+             data-bs-toggle="tooltip" data-bs-placement="top" title="View Details"
+             (click)="toggleDetails(user.userId)">
+            <i class="ti ti-eye fs-4"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="bg-warning rounded-circle p-2 text-white d-inline-flex"
+             data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User"
+             (click)="selectUser(user)">
+            <i class="ti ti-pencil fs-4"></i>
+          </a>
+
+          <a href="javascript:void(0)" class="bg-danger rounded-circle p-2 text-white d-inline-flex"
+             data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User"
+             (click)="deleteUser(user.userId)">
+            <i class="ti ti-trash fs-4"></i>
+          </a>
+        </div>
+        <div class="card-header">
+          {{ user.role }}
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{ user.username }}</h5>
+          <p class="card-text">{{ user.email }}</p>
+
+        </div>
+        <div id="details_{{ user.userId }}" class="details" [hidden]="!expandedUserDetails[user.userId]">
+          <ul class="list-unstyled">
+            <li><strong>First Name:</strong> {{ user.firstName }}</li>
+            <li><strong>Last Name:</strong> {{ user.lastName }}</li>
+            <li><strong>Phone Number:</strong> {{ user.phoneNumber }}</li>
+
+
+            <ng-container *ngIf="isEmployee(user)">
+              <li><strong>Position:</strong> {{ user.position }}</li>
+              <li><strong>Experience Years:</strong> {{ user.experienceYears }}</li>
+              <li><strong>Availability:</strong> {{ user.availability ? 'Available' : 'Not Available' }}</li>
+            </ng-container>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+</body>

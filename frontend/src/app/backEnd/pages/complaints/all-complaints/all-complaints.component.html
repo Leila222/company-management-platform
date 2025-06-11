@@ -1,0 +1,81 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar></app-sidebar>
+  <div class="body-wrapper">
+    <app-header></app-header>
+    <div class="container-fluid">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-5 mb-3">
+          <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+            <input type="text" class="form-control" placeholder="Search for a complaint..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+        </div>
+        <div class="col-md-7 text-end">
+          <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+            {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12 text-center">
+          <div class="text-md-center" style="font-weight: bold; font-size:22px">
+            Complaints
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let complaint of filteredComplaints">
+          <div class="card mb-3">
+            <div class="card-header" title="Status">
+              {{complaint.status ? 'Handled' : 'Not handled yet'}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ complaint.title }}</h5>
+              <p class="card-text">{{ complaint.description }}</p>
+            </div>
+            <div class="action-buttons">
+              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex"
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="View Details"
+                 (click)="toggleDetails(complaint.idComplaint)">
+                <i class="ti ti-eye fs-4"></i>
+              </a>
+
+              <a href="javascript:void(0)" class="bg-danger rounded-circle p-2 text-white d-inline-flex"
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Complaint"
+                 (click)="deleteComplaint(complaint.idComplaint)">
+                <i class="ti ti-trash fs-4"></i>
+              </a>
+            </div>
+            <div id="details_{{ complaint.idComplaint }}" class="details" [hidden]="!expandedComplaintDetails[complaint.idComplaint]">
+              <div class="row">
+                <div class="col-md-7">
+              <ul class="list-unstyled">
+                <li><strong>Sender:</strong> {{ complaint.sender.firstName }} {{complaint.sender.lastName}}</li>
+                <li><strong>Receiver:</strong> {{ complaint.receiver.firstName }} {{complaint.receiver.lastName}}</li>
+                <li><strong>Issue Date:</strong> {{ complaint.issueDate }}</li>
+              </ul>
+                </div>
+                <div class="col-md-5 d-flex justify-content-end">
+                  <button class="btn btn-outline-primary mb-3"
+                          style="margin-right: 14px; margin-top: 24px;"
+                          (click)="handleComplaint(complaint)"
+                          [disabled]="complaint.status">
+                    Handle
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

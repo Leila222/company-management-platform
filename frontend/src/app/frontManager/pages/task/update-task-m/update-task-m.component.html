@@ -1,0 +1,92 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-manager></app-sidebar-manager>
+  <div class="body-wrapper">
+    <app-header-manager></app-header-manager>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <img src="/assets/backTemplate/images/logos/task.png" class="img-fluid mb-5" alt="Task Picture" style="max-width: 120%; height: auto;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <form [formGroup]="taskForm" (ngSubmit)="updateTask()">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Task Title</label>
+                  <input type="text" class="form-control" id="title" formControlName="title" required>
+                  <div *ngIf="isFieldInvalid('title')" class="alert alert-danger">
+                    Task title is required
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" formControlName="description" required></textarea>
+                  <div *ngIf="isFieldInvalid('description')" class="alert alert-danger">
+                    Description is required
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="startDate" class="form-label">Start Date</label>
+                    <input type="datetime-local" class="form-control" id="startDate" formControlName="startDate">
+                  </div>
+
+                  <div class="col">
+                    <label for="endDate" class="form-label">End Date</label>
+                    <input type="datetime-local" class="form-control" id="endDate" formControlName="endDate">
+                  </div>
+
+                </div>
+                <div class="row mb-3">
+
+                  <div class="col">
+                    <label for="dueDate" class="form-label">Due Date</label>
+                    <input type="datetime-local" class="form-control" id="dueDate" formControlName="dueDate">
+                    <div *ngIf="taskForm.errors?.['dateInvalid']" class="alert alert-danger">
+                      Due date must be after the start date
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="projectId" class="form-label">Project</label>
+                    <select class="form-control" id="projectId" formControlName="projectId" required>
+                      <option *ngFor="let project of projects" [value]="project.idProject">{{ project.name }}</option>
+                    </select>
+                    <div *ngIf="isFieldInvalid('projectId')" class="alert alert-danger">
+                      Please select a project
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="assignedEmpId" class="form-label">Assigned Employee</label>
+                    <select class="form-control" id="assignedEmpId" formControlName="assignedEmpId">
+                      <option *ngFor="let employee of employees" [value]="employee.userId">{{ employee.firstName }} {{ employee.lastName }}</option>
+                    </select>
+                    <div *ngIf="isFieldInvalid('assignedEmpId')" class="alert alert-danger">
+                      Please select the assigned employee
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="status" class="form-label">Status</label>
+                    <select class="form-control" id="status" formControlName="status" required>
+                      <option *ngFor="let stat of status" [value]="stat">{{ stat }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <br>
+                <button type="submit" class="btn btn-primary">Update Task</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

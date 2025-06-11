@@ -1,0 +1,44 @@
+<body>
+<!--  Body Wrapper -->
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-manager></app-sidebar-manager>
+  <div class="body-wrapper">
+    <app-header-manager></app-header-manager>
+    <br>
+    <div class="container-fluid">
+      <!-- Profile Section -->
+      <section class="profile-section">
+        <div class="card profile-card">
+          <div class="card-header">
+            <h5 class="card-title">{{userProfile.username}}</h5>
+          </div>
+          <div class="card-body">
+            <!-- Profile Content -->
+            <div class="row">
+              <div class="col-md-4">
+                <img src="assets/backTemplate/images/profile/user-1.jpg" alt="Profile Picture"
+                     class="img-fluid rounded-circle mb-3">
+              </div>
+              <div class="col-md-8">
+                <h4>{{ userProfile.firstName }} {{ userProfile.lastName }}</h4>
+                <ul class="list-unstyled">
+                  <li><strong>Email: </strong>{{ userProfile.email}}</li>
+                  <li><strong>Phone: </strong>{{ userProfile.phoneNumber }}</li>
+                  <li><strong>Role:</strong> {{ userProfile.role }}</li>
+                </ul>
+                <hr>
+                <!-- Profile Actions (Buttons) -->
+                <div class="d-grid gap-2">
+                  <button class="btn btn-primary btn-lg" type="button" routerLink="/updateProfile">Edit Profile</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+</body>

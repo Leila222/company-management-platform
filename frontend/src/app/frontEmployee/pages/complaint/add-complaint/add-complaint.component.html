@@ -1,0 +1,57 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-emp></app-sidebar-emp>
+  <div class="body-wrapper">
+    <app-header-emp></app-header-emp>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <img src="assets/backTemplate/images/logos/complaint.png" class="img-fluid mb-5" alt="Complaint Image"
+                   style="max-width: 120%; height: auto;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h2>New Complaint</h2>
+              <form [formGroup]="complaintForm" (ngSubmit)="addComplaint()">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Complaint Title</label>
+                  <input type="text" class="form-control" id="title" formControlName="title" required>
+                  <div *ngIf="isFieldInvalid('title')" class="alert alert-danger">
+                    Complaint title is required
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" formControlName="description" required></textarea>
+                  <div *ngIf="isFieldInvalid('description')" class="alert alert-danger">
+                    Description is required
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="receiverId" class="form-label">Project Manager</label>
+                  <select class="form-control" id="receiverId" formControlName="receiverId" required>
+                    <option *ngFor="let manager of projectManagers" [value]="manager.userId">
+                      {{ manager.firstName }} {{ manager.lastName }}
+                    </option>
+                  </select>
+                  <div *ngIf="isFieldInvalid('receiverId')" class="alert alert-danger">
+                    Please select a project manager
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Add Complaint</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

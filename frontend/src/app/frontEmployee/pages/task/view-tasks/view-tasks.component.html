@@ -1,0 +1,78 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-emp></app-sidebar-emp>
+  <div class="body-wrapper">
+    <app-header-emp></app-header-emp>
+    <div class="container-fluid">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-5 mb-3">
+          <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+            <input type="text" class="form-control" placeholder="Search for a task..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+        </div>
+        <div class="col-md-7 text-end">
+          <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+            {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12 text-center">
+          <div class="text-md-center" style="font-weight: bold; font-size:22px">
+            MY TASKS
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let task of filteredTasks">
+          <div class="card mb-3">
+            <div class="card-header" title="Assigned To">
+              <strong>Project:</strong> {{ task.project.name }}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ task.title }}</h5>
+              <p class="card-text">{{ task.description }}</p>
+            </div>
+            <div class="action-buttons">
+              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex"
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="View Details"
+                 (click)="toggleDetails(task.idTask)">
+                <i class="ti ti-eye fs-4"></i>
+              </a>
+
+              <a href="javascript:void(0)"
+                 class="bg-danger rounded-circle p-2 text-white d-inline-flex"
+                 [ngClass]="{'disabled-link': task.status === 'COMPLETED'}"
+                 data-bs-toggle="tooltip"
+                 data-bs-placement="top"
+                 title="Mark as done"
+                 (click)="task.status !== 'COMPLETED' && doneTask(task)">
+                <i class="ti ti-check fs-4"></i>
+              </a>
+
+
+            </div>
+            <div id="details_{{ task.idTask }}" class="details" [hidden]="!expandedTaskDetails[task.idTask]">
+              <ul class="list-unstyled">
+                <li><strong>Start Date:</strong>  {{ task.startDate | date:'d MMMM yyyy \'at\' HH:mm' }}</li>
+                <li><strong>Due Date:</strong>  {{ task.dueDate | date:'d MMMM yyyy \'at\' HH:mm' }}</li>
+                <li *ngIf="task.endDate">
+                  <strong>End Date:</strong>  {{ task.endDate | date:'d MMMM yyyy \'at\' HH:mm' }}
+                </li>
+                <li><strong>Status:</strong> {{ task.status }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

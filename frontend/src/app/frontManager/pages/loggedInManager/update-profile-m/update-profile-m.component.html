@@ -1,0 +1,74 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-manager></app-sidebar-manager>
+  <div class="body-wrapper">
+    <app-header-manager></app-header-manager>
+    <div class="container-fluid">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <!-- Left side: Picture -->
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Profile Picture</h5>
+                <img src="assets/backTemplate/images/profile/user-1.jpg" class="img-fluid rounded-circle mb-3" alt="Profile Picture" style="max-width: 100%; height: auto;">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title fw-semibold mb-4">Update Profile</h5>
+                <form [formGroup]="updateProfileForm" (ngSubmit)="submitUpdate()">
+                  <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" formControlName="username" [attr.disabled]="true">
+                  </div>
+                  <div class="mb-3" [ngClass]="{'has-error': isFieldInvalid('firstName')}">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" formControlName="firstName" required>
+                    <div *ngIf="isFieldInvalid('firstName')" class="alert alert-danger">
+                      Valid First Name is required
+                    </div>
+                  </div>
+                  <div class="mb-3" [ngClass]="{'has-error': isFieldInvalid('lastName')}">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" formControlName="lastName" required>
+                    <div *ngIf="isFieldInvalid('lastName')" class="alert alert-danger">
+                      Valid Last Name is required
+                    </div>
+                  </div>
+                  <div class="mb-3" [ngClass]="{'has-error': isFieldInvalid('email')}">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" formControlName="email" required>
+                    <div *ngIf="isFieldInvalid('email')" class="alert alert-danger">
+                      Valid Email is required
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select class="form-select" id="role" formControlName="role" required [attr.disabled]="true">
+                      <option *ngFor="let role of roles" [ngValue]="role">{{ role }}</option>
+                    </select>
+                  </div>
+                  <div class="mb-3" [ngClass]="{'has-error': isFieldInvalid('phoneNumber')}">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" formControlName="phoneNumber" required>
+                    <div *ngIf="isFieldInvalid('phoneNumber')" class="alert alert-danger">
+                      Valid Phone Number is required starting with +216
+                    </div>
+                  </div>
+                  <div class="mb-3 d-flex justify-content-between">
+                    <button type="submit" class="btn btn-primary m-1" [disabled]="updateProfileForm.invalid">Update Profile</button>
+                    <button type="button" class="btn btn-danger m-1" (click)="changePassword()">Change Password</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

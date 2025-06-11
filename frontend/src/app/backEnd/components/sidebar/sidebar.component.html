@@ -1,0 +1,113 @@
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div>
+      <div class="brand-logo d-flex align-items-center justify-content-between">
+        <a href="./index.html" class="text-nowrap logo-img">
+          <img src="/assets/backTemplate/images/logos/archimedLogo.png" width="200" alt="" />
+        </a>
+        <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+          <i class="ti ti-x fs-8"></i>
+        </div>
+      </div>
+      <!-- Sidebar navigation-->
+      <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+        <ul id="sidebarnav">
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Home</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/dashboard" aria-expanded="false" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <span>
+                <i class="ti ti-layout-dashboard"></i>
+              </span>
+              <span class="hide-menu">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">Elements</span>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/users" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-article"></i>
+              </span>
+              <span class="hide-menu">Users</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/projects" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-alert-circle"></i>
+              </span>
+              <span class="hide-menu">Projects</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/tasks" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-cards"></i>
+              </span>
+              <span class="hide-menu">Tasks</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/complaints" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-file-description"></i>
+              </span>
+              <span class="hide-menu">Complaints</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/calendarTasks" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-calendar"></i>
+              </span>
+              <span class="hide-menu">Calender</span>
+            </a>
+          </li>
+
+          <li class="nav-small-cap">
+            <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
+            <span class="hide-menu">AUTH</span>
+          </li>
+
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/addAdmin" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-user-plus"></i>
+              </span>
+              <span class="hide-menu">Add Admin</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/addManager" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-user-plus"></i>
+              </span>
+              <span class="hide-menu">Add Project Manager</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" routerLink="/addEmployee" routerLinkActive="active" aria-expanded="false">
+              <span>
+                <i class="ti ti-user-plus"></i>
+              </span>
+              <span class="hide-menu">Add Employee</span>
+            </a>
+          </li>
+          <li class="sidebar-item">
+            <a class="sidebar-link" (click)="logout()" aria-expanded="false">
+              <span>
+                <i class="ti ti-login"></i>
+              </span>
+              <span class="hide-menu">Logout</span>
+            </a>
+          </li>
+
+        </ul>
+      </nav>
+    </div>
+  </aside>

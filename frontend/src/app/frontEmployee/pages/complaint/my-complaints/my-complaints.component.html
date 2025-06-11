@@ -1,0 +1,68 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-emp></app-sidebar-emp>
+  <div class="body-wrapper">
+    <app-header-emp></app-header-emp>
+    <div class="container-fluid">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3 text-start">
+          <button class="btn btn-outline-primary mb-3" routerLink="/addComplaint">
+            Add Complaint
+          </button>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+            <input type="text" class="form-control" placeholder="Search for a complaint..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+        </div>
+        <div class="col-md-3 text-end">
+          <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+            {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12 text-center">
+          <div class="text-md-center" style="font-weight: bold; font-size:22px">
+            MY COMPLAINTS
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let complaint of filteredComplaints">
+          <div class="card mb-3">
+            <div class="card-header" title="Status">
+              {{complaint.status ? 'Handled' : 'Not handled yet'}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ complaint.title }}</h5>
+              <p class="card-text">{{ complaint.description }}</p>
+            </div>
+            <div class="action-buttons">
+              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex"
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="View Details"
+                 (click)="toggleDetails(complaint.idComplaint)">
+                <i class="ti ti-eye fs-4"></i>
+              </a>
+
+            </div>
+            <div id="details_{{ complaint.idComplaint }}" class="details" [hidden]="!expandedComplaintDetails[complaint.idComplaint]">
+                  <ul class="list-unstyled">
+                    <li><strong>To:</strong> {{ complaint.receiver.firstName }} {{complaint.receiver.lastName}}</li>
+                    <li><strong>Issue Date:</strong> {{ complaint.issueDate }}</li>
+                  </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

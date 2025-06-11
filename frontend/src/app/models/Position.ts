@@ -1,0 +1,7 @@
+export enum Position {
+    DEVELOPER = 'DEVELOPER',
+    TESTER = 'TESTER',
+    DESIGNER = 'DESIGNER',
+    CLOUD_ARCHITECT = 'CLOUD_ARCHITECT'
+  }
+  

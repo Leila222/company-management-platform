@@ -1,0 +1,32 @@
+.card {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.card-header {
+  border-radius: 10px 10px 0 0;
+  padding: 15px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.card-text {
+  margin-bottom: 10px;
+}
+
+.btn-close {
+  margin-top: -5px;
+  margin-right: -5px;
+}
+.disabled-link {
+  pointer-events: none;
+  opacity: 0.5;
+}

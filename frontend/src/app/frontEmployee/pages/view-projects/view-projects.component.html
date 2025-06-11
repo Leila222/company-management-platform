@@ -1,0 +1,71 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-emp></app-sidebar-emp>
+  <div class="body-wrapper">
+    <app-header-emp></app-header-emp>
+    <div class="container-fluid">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-5 mb-3">
+          <div class="input-group">
+      <span class="input-group-text">
+        <i class="bi bi-search"></i>
+      </span>
+            <input type="text" class="form-control" placeholder="Search for a project..." [(ngModel)]="searchTerm" (input)="onSearch()">
+          </div>
+        </div>
+        <div class="col-md-7 text-end">
+          <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+            {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12 text-center">
+          <div class="text-md-center" style="font-weight: bold; font-size:22px">
+            PROJECTS
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let project of filteredProjects">
+          <div class="card mb-3">
+            <div class="card-header" title="PROJECT_MANAGER">
+              {{ project.projectManager.firstName}} {{project.projectManager.lastName}}
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">{{ project.name }}</h5>
+              <p class="card-text">{{ project.description }}</p>
+            </div>
+            <div class="action-buttons">
+              <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex"
+                 data-bs-toggle="tooltip" data-bs-placement="top" title="View Details"
+                 (click)="toggleDetails(project.idProject)">
+                <i class="ti ti-eye fs-4"></i>
+              </a>
+
+            </div>
+            <div id="details_{{ project.idProject }}" class="details" [hidden]="!expandedProjectDetails[project.idProject]">
+              <div class="row">
+                <div class="col-md-7">
+                  <ul class="list-unstyled">
+                    <li><strong>Start Date:</strong> {{ project.startDate ? project.startDate : 'Not set yet' }}</li>
+                    <li><strong>End Date:</strong> {{ project.endDate ? project.endDate : 'Not set yet' }}</li>
+                  </ul>
+                </div>
+                <div class="col-md-5 d-flex justify-content-end">
+                  <a class="btn btn-outline-primary mb-3" style="margin-right: 14px;" [routerLink]="['/ProjectTasks', project.idProject]">
+                    View Tasks
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

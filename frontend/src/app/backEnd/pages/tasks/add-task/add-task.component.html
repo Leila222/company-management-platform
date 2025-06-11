@@ -1,0 +1,81 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+     data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar></app-sidebar>
+  <div class="body-wrapper">
+    <app-header></app-header>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <img src="assets/backTemplate/images/logos/task.png" class="img-fluid mb-5" alt="Task Image"
+                   style="max-width: 120%; height: auto;">
+            </div>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h2> New Task</h2>
+              <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Task Title</label>
+                  <input type="text" class="form-control" id="title" formControlName="title" required>
+                  <div *ngIf="isFieldInvalid('title')" class="alert alert-danger">
+                    Task title is required
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="description" formControlName="description" required></textarea>
+                  <div *ngIf="isFieldInvalid('description')" class="alert alert-danger">
+                    Description is required
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <div class="col">
+                    <label for="startDate" class="form-label">Start Date and Time</label>
+                    <input type="datetime-local" class="form-control" id="startDate" formControlName="startDate">
+                    <div *ngIf="isFieldInvalid('dateInvalid')" class="alert alert-danger">
+                      Start Date is required
+                    </div>
+                  </div>
+                  <div class="col">
+                    <label for="dueDate" class="form-label">Due Date and Time</label>
+                    <input type="datetime-local" class="form-control" id="dueDate" formControlName="dueDate">
+                    <div *ngIf="taskForm.errors?.['dateInvalid']" class="alert alert-danger">
+                      Due date must be after the start date
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="projectId" class="form-label">Project</label>
+                  <select class="form-control" id="projectId" formControlName="projectId" required>
+                    <option *ngFor="let project of projects" [value]="project.idProject">{{ project.name }}</option>
+                  </select>
+                  <div *ngIf="isFieldInvalid('projectId')" class="alert alert-danger">
+                    Please select a project
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="assignedEmpId" class="form-label">Employee</label>
+                  <select class="form-control" id="assignedEmpId" formControlName="assignedEmpId" required>
+                    <option *ngFor="let employee of employees" [value]="employee.userId">{{ employee.firstName }} {{employee.lastName}}</option>
+                  </select>
+                  <div *ngIf="isFieldInvalid('assignedEmpId')" class="alert alert-danger">
+                    Please assign an employee to the task
+                  </div>
+                </div>
+                <br>
+                <button type="submit" class="btn btn-primary">Add Task</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

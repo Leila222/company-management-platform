@@ -1,0 +1,138 @@
+<body>
+<div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+  <app-sidebar-emp></app-sidebar-emp>
+  <div class="body-wrapper">
+    <app-header-emp></app-header-emp>
+    <div class="container-fluid">
+      <div class="row mb-3">
+        <div class="col-md-7">
+          <div class="text-md-end" style="font-weight: bold; font-size: 22px;">
+            TASKS FOR PROJECT {{ project.name.toUpperCase() }}
+          </div>
+        </div>
+        <div class="col-md-5 text-end">
+          <button class="btn btn-primary mb-3" (click)="toggleAllDetails()">
+            {{ areAllExpanded ? 'Hide All Details' : 'Show All Details' }}
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- TO_DO Tasks -->
+        <div class="col-md-4">
+          <div class="task-box">
+            <h4 class="text-primary text-center">TO DO</h4>
+            <div class="task-column">
+              <div class="card mb-3" *ngFor="let task of filterTasksByStatus('TO_DO')">
+                <div class="card-header">{{ task.assignedEmp ? task.assignedEmp.firstName + ' ' + task.assignedEmp.lastName : 'Not assigned yet' }}</div>
+                <div class="card-body">
+                  <h5 class="card-title"><span class="title">{{ task.title }}</span></h5>
+                  <p class="card-text"><span class="title">{{ task.description }}</span></p>
+                  <div class="action-buttons">
+                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex" (click)="toggleDetails(task.idTask)">
+                      <i class="ti ti-eye fs-4"></i>
+                    </a>
+                  </div>
+                  <div id="details_{{ task.idTask }}" class="details" [hidden]="!expandedTaskDetails[task.idTask]">
+                    <ul class="list-unstyled">
+                      <li class="start-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Start Date: </strong>  <span class="date">{{ task.startDate | date:' d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.dueDate" class="due-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Due Date: </strong> <span class="date"> {{ task.dueDate | date:' d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.endDate" class="end-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>End Date: </strong> <span class="date"> {{ task.endDate | date:' d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IN_PROGRESS Tasks -->
+        <div class="col-md-4">
+          <div class="task-box">
+            <h4 class="text-danger text-center">IN PROGRESS</h4>
+            <div class="task-column">
+              <div class="card mb-3" *ngFor="let task of filterTasksByStatus('IN_PROGRESS')">
+                <div class="card-header">{{ task.assignedEmp ? task.assignedEmp.firstName + ' ' + task.assignedEmp.lastName : 'Not assigned yet' }}</div>
+                <div class="card-body">
+                  <h5 class="card-title"><span class="title">{{ task.title }}</span></h5>
+                  <p class="card-text"><span class="title">{{ task.description }}</span></p>
+                  <div class="action-buttons">
+                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex" (click)="toggleDetails(task.idTask)">
+                      <i class="ti ti-eye fs-4"></i>
+                    </a>
+                  </div>
+                  <div id="details_{{ task.idTask }}" class="details" [hidden]="!expandedTaskDetails[task.idTask]">
+                    <ul class="list-unstyled">
+                      <li class="start-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Start Date: </strong> <span class="date"> {{ task.startDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.dueDate" class="due-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Due Date: </strong> <span class="date"> {{ task.dueDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.endDate" class="end-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>End Date: </strong>  <span class="date">{{ task.endDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- COMPLETED Tasks -->
+        <div class="col-md-4">
+          <div class="task-box">
+            <h4 class="text-success text-center">COMPLETED</h4>
+            <div class="task-column">
+              <div class="card mb-3" *ngFor="let task of filterTasksByStatus('COMPLETED')">
+                <div class="card-header">{{ task.assignedEmp ? task.assignedEmp.firstName + ' ' + task.assignedEmp.lastName : 'Not assigned yet' }}</div>
+                <div class="card-body">
+                  <h5 class="card-title"><span class="title">{{ task.title }}</span></h5>
+                  <p class="card-text"><span class="title">{{ task.description }}</span></p>
+                  <div class="action-buttons">
+                    <a href="javascript:void(0)" class="bg-primary rounded-circle p-2 text-white d-inline-flex" (click)="toggleDetails(task.idTask)">
+                      <i class="ti ti-eye fs-4"></i>
+                    </a>
+                  </div>
+                  <div id="details_{{ task.idTask }}" class="details" [hidden]="!expandedTaskDetails[task.idTask]">
+                    <ul class="list-unstyled">
+                      <li class="start-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Start Date: </strong> <span class="date"> {{ task.startDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.dueDate" class="due-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>Due Date: </strong> <span class="date"> {{ task.dueDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                      <li *ngIf="task.endDate" class="end-date">
+                        <i class="fas fa-calendar-alt"></i>
+                        <strong>End Date: </strong>  <span class="date">{{ task.endDate | date:'d MMMM yyyy \'at\' HH:mm' }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</body>
