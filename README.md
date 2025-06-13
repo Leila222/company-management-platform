@@ -45,6 +45,3 @@ A full-stack **Task Management System** designed for enterprise use, built with 
 - **Angular Material**
 - **Bootstrap**
 - **RxJS**
-
-## Project Structure
-
